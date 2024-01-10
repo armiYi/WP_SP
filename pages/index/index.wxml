@@ -15,7 +15,7 @@
 
   <ui-navbar back="{{false}}" bg="ui-BG-Main" op isSlot>
     <view class="flex-bar p-3">
-      <image src="/images/logo.png" mode="aspectFill" style="width: 200rpx;height: 56rpx;" />
+      <!--<image src="/images/logo.png" mode="aspectFill" style="width: 200rpx;height: 56rpx;" />-->
     </view>
   </ui-navbar>
   <!-- 首次进入引导添加到“我的小程序” -->
