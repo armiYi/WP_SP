@@ -1,5 +1,4 @@
-<!--
-/*
+<!-- /*
  * 
  * 微慕小程序开源版
  * author: jianbo
@@ -9,24 +8,23 @@
  * 开源协议：MIT
  * Copyright (c) 2017  微慕 https://www.minapper.com All rights reserved.
  *
- */-->
+ */ -->
 <import src="../../templates/common-list.wxml" />
 <import src="../../templates/copyright.wxml" />
-
 <ui-sys tabbar>
   <ui-navbar back="{{false}}" isSlot>
     <view class="flex-center flex-sub">排行榜</view>
   </ui-navbar>
   <view class="tab-bar ui-BG">
     <block wx:for="{{topBarItems}}" wx:key="id">
-      <view class="tab-item {{item.selected ? 'tab-Selected': '' }}" catchtap="onTapTag" id="{{item.id}}">{{item.name}}</view>
+      <view class="tab-item {{item.selected ? 'tab-Selected': '' }}" catchtap="onTapTag" id="{{item.id}}">
+        {{item.name}}
+      </view>
     </block>
   </view>
-
   <view class="container">
     <view class="showerror" style="display:{{showerror}}">
       <text class="cicon-wifi-off text-xsl"></text>
-
       <view class="errortext">
         暂时无法访问网络
         <view class="">
@@ -34,10 +32,9 @@
         </view>
       </view>
     </view>
-
     <view style="display:{{showallDisplay}}">
-
-      <view class="post-list">
+      <article list="{{postsList}}" type="{{articleStyle}}" />
+      <!-- <view class="post-list">
         <block wx:key="id" wx:for="{{postsList}}">
           <view class="post-item ui-BG ui-BG-card" index="{{index}}" id="{{item.post_id}}" bindtap="redictDetail">
 
@@ -57,10 +54,8 @@
             <image src="{{item.post_thumbnail_image}}" mode="aspectFill" class="post-img"></image>
           </view>
         </block>
-      </view>
-
+      </view> -->
     </view>
-
     <view class="copyright" style="display:{{floatDisplay}}">
       <template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
     </view>

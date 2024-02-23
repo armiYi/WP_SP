@@ -42,8 +42,14 @@ Page({
     isFirst: false, // 是否第一次打开,
     isLoading: false,
     swipe_nav: [],
-    selected_nav: []
-
+    selected_nav: [],
+    articleStyle: config.articleStyle || 1
+  },
+  getArticleStyle() {
+    const articleStyle = wx.getStorageSync('articleStyle') || config.articleStyle || 1
+    this.setData({
+      articleStyle: +articleStyle,
+    })
   },
   formSubmit: function (e) {
     var url = '../list/list'
@@ -72,8 +78,8 @@ Page({
     return {
       title: '“' + webSiteName + '”小程序,基于微慕WordPress版小程序构建',
       path: 'pages/index/index',
-      appInfo:{
-        'appId':config.appghId
+      appInfo: {
+        'appId': config.appghId
       },
       success: function (res) {
         // 转发成功
@@ -158,12 +164,12 @@ Page({
 
   },
   onShow: function (options) {
-    if (typeof this.getTabBar === 'function' &&
-    this.getTabBar()) {
-    this.getTabBar().setData({
-      selected: 0
-    })
-  }
+    this.getArticleStyle()
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
     wx.setStorageSync('openLinkCount', 0);
 
     var nowDate = new Date();
@@ -253,9 +259,9 @@ Page({
                 postsList: self.data.postsList.concat(response.data.map(function (item) {
 
                   var strdate = item.date
-                 
-                    item.categoryImage = "";
-                
+
+                  item.categoryImage = "";
+
 
                   if (item.post_medium_image == null || item.post_medium_image == '') {
                     item.post_medium_image = "../../images/logo700.png";
@@ -323,22 +329,22 @@ Page({
     var self = this;
     var getCategoriesRequest = wxRequest.getRequest(Api.getCategoriesIds());
     getCategoriesRequest.then(res => {
-     
+
 
       var getPostsRequest = wxRequest.getRequest(Api.getStickyPosts(data));
       getPostsRequest
         .then(response => {
           if (response.statusCode === 200) {
             if (response.data.length) {
-             
+
               self.setData({
                 floatDisplay: "block",
                 postsstickyList: self.data.postsstickyList.concat(response.data.map(function (item) {
 
                   var strdate = item.date
-                 
-                    item.categoryImage = "";
-                 
+
+                  item.categoryImage = "";
+
 
                   if (item.post_medium_image == null || item.post_medium_image == '') {
                     item.post_medium_image = "../../images/logo700.png";
@@ -369,8 +375,8 @@ Page({
             }
           }
         })
-      
-   
+
+
 
     })
 
@@ -458,23 +464,21 @@ Page({
       })
     }
     if (type === 'miniapp') { // 其他小程序
-      if(jumptype=='embedded')
-      {
+      if (jumptype == 'embedded') {
         wx.openEmbeddedMiniProgram({
           appId: appid,
           path: path,
-          allowFullScreen:true
+          allowFullScreen: true
         })
 
       }
-      else
-      {
+      else {
         wx.navigateToMiniProgram({
           appId: appid,
           path: path
         })
       }
-      
+
     }
   },
   //返回首页
